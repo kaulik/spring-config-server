@@ -74,6 +74,8 @@ pipeline {
                     sh """
                         docker stop ${IMAGE_NAME} || true
                         docker rm   ${IMAGE_NAME} || true
+                        docker ps -q --filter publish=8888 | xargs -r docker stop
+                        docker ps -aq --filter publish=8888 | xargs -r docker rm
                         docker run -d \
                           --name ${IMAGE_NAME} \
                           -p 8888:8888 \
