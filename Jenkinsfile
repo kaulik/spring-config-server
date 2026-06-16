@@ -74,11 +74,11 @@ pipeline {
                     sh """
                         docker stop ${IMAGE_NAME} || true
                         docker rm   ${IMAGE_NAME} || true
-                        docker ps -q --filter publish=8888 | xargs -r docker stop
-                        docker ps -aq --filter publish=8888 | xargs -r docker rm
+                        docker ps -q --filter publish=8686 | xargs -r docker stop
+                        docker ps -aq --filter publish=8686 | xargs -r docker rm
                         docker run -d \
                           --name ${IMAGE_NAME} \
-                          -p 8888:8888 \
+                          -p 8686:8686 \
                           -e CONFIG_REPO_URI=${CONFIG_REPO_URI} \
                           -e CONFIG_REPO_USERNAME=${CONFIG_REPO_USERNAME} \
                           -e CONFIG_REPO_PASSWORD=${CONFIG_REPO_PASSWORD} \

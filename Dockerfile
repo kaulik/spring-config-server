@@ -12,6 +12,6 @@ COPY target/*.jar spring-config-server.jar
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 USER appuser
 
-EXPOSE 8888
+EXPOSE 8686
 
 ENTRYPOINT ["java", "-jar", "spring-config-server.jar"]
