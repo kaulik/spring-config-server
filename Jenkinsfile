@@ -11,7 +11,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = "spring-config-server"
-        FULL_IMAGE = "${IMAGE_NAME}:${params.BUILD_ID}"
+        FULL_IMAGE  = "${IMAGE_NAME}:${params.BUILD_ID}"
     }
 
     tools {
@@ -24,6 +24,7 @@ pipeline {
             steps {
                 echo "BUILD_ID : ${params.BUILD_ID}"
                 sh 'docker info'
+                sh 'ls -la'
             }
         }
 
@@ -80,6 +81,7 @@ pipeline {
                           -e CONFIG_REPO_USERNAME=${CONFIG_REPO_USERNAME} \
                           -e CONFIG_REPO_PASSWORD=${CONFIG_REPO_PASSWORD} \
                           -e CONFIG_REPO_BRANCH=main \
+                          -e BUILD_ID=${params.BUILD_ID} \
                           --add-host=host.docker.internal:host-gateway \
                           --restart unless-stopped \
                           ${IMAGE_NAME}:${params.BUILD_ID}
