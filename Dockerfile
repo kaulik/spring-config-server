@@ -1,0 +1,17 @@
+FROM eclipse-temurin:17-jre-alpine
+
+LABEL description="Spring Cloud Config Server"
+
+ARG BUILD_ID=local
+ENV BUILD_ID=${BUILD_ID}
+
+WORKDIR /app
+
+COPY target/*.jar app.jar
+
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
+
+EXPOSE 8888
+
+ENTRYPOINT ["java", "-jar", "app.jar"]

@@ -1,0 +1,26 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: spring-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: ${CONFIG_REPO_URI}
+          default-label: ${CONFIG_REPO_BRANCH:main}
+          clone-on-start: true
+          force-pull: true
+          # For private repos via HTTPS — set CONFIG_REPO_USERNAME / CONFIG_REPO_PASSWORD
+          username: ${CONFIG_REPO_USERNAME:}
+          password: ${CONFIG_REPO_PASSWORD:}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,refresh,env
+  endpoint:
+    health:
+      show-details: always
